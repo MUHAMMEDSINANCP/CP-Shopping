@@ -65,7 +65,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                   return Container(
                     width: media.width,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 30),
+                        horizontal: 20, vertical: 60),
                     child: Column(
                       children: [
                         Image.asset(
@@ -79,7 +79,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                           style: TextStyle(
                               color: TColor.primary,
                               fontSize: 20,
-                              fontWeight: FontWeight.w500),
+                              fontWeight: FontWeight.w700),
                         ),
                         const SizedBox(
                           height: 15,
@@ -88,10 +88,10 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                           pObj["subtitle"].toString(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              color: TColor.secondaryText, fontSize: 14),
+                              color: TColor.secondaryText, fontSize: 15),
                         ),
                         SizedBox(
-                          height: media.width * 0.35,
+                          height: media.width * 0.39,
                         ),
                       ],
                     ),
@@ -107,8 +107,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
                     return Container(
                       margin: const EdgeInsets.symmetric(horizontal: 2),
-                      height: 4,
-                      width: 4,
+                      height: 7,
+                      width: 7,
                       decoration: BoxDecoration(
                           color: index == selectPage
                               ? TColor.primary

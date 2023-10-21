@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../common/color_extension.dart';
 import '../account/account_view.dart';
+import '../cart/cart_view.dart';
 import '../fav/saved_item_view.dart';
 import '../home/home_view.dart';
 import '../search/search_view.dart';
@@ -44,15 +45,16 @@ class _MainTabViewState extends State<MainTabView>
       backgroundColor: TColor.white,
       body: TabBarView(
         controller: controller,
-        children: [
-          const HomeView(),
-          const SearchView(),
-          Container(),
-          const SavedItemsView(),
-          const AccountView(),
+        children: const [
+          HomeView(),
+          SearchView(),
+          CartView(),
+          SavedItemsView(),
+          AccountView(),
         ],
       ),
       bottomNavigationBar: Container(
+        height: 70,
         decoration: BoxDecoration(color: TColor.white, boxShadow: const [
           BoxShadow(color: Colors.black12, blurRadius: 3, offset: Offset(0, -2))
         ]),
@@ -62,15 +64,9 @@ class _MainTabViewState extends State<MainTabView>
             child: TabBar(
               controller: controller,
               indicator: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: TColor.primary,
-                    width: 3.0
-                  )
-                )
-              ),
-
-              indicatorPadding: const EdgeInsets.symmetric(horizontal: 15) ,
+                  border: Border(
+                      top: BorderSide(color: TColor.primary, width: 3.0))),
+              indicatorPadding: const EdgeInsets.symmetric(horizontal: 15),
               tabs: [
                 Tab(
                   icon: Image.asset(

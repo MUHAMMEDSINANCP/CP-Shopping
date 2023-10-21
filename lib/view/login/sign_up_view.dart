@@ -127,6 +127,17 @@ class _SignUpViewState extends State<SignUpView> {
   bool isExclusives = false;
   bool isAppPartners = false;
 
+  // Function to reset the state variables for checkboxes
+  void clearCheckboxes() {
+    setState(() {
+      isMenswear = false;
+      isDiscount = false;
+      isNewStuff = false;
+      isExclusives = false;
+      isAppPartners = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -186,12 +197,12 @@ class _SignUpViewState extends State<SignUpView> {
               const SizedBox(
                 height: 15,
               ),
-              RoundTextField(
+              RoundTextFieldWithEyeIcon(
                 controller: txtPassword,
                 title: "Password",
-                obscureText: true,
                 hitText: "Enter password",
                 subtext: "Must be 10 or more characters",
+                showEyeIcon: true,
               ),
               const SizedBox(
                 height: 15,
@@ -312,7 +323,7 @@ class _SignUpViewState extends State<SignUpView> {
                                     width: 15,
                                   ),
                                   Text(
-                                    "Wonenswear",
+                                    "Womenswear",
                                     style: TextStyle(
                                         color: TColor.primaryText,
                                         fontSize: 16),
@@ -379,10 +390,15 @@ class _SignUpViewState extends State<SignUpView> {
                           style: TextStyle(
                               color: TColor.primaryText, fontSize: 14),
                         ),
-                        Image.asset(
-                          "assets/img/close.png",
-                          width: 18,
-                          height: 18,
+                        GestureDetector(
+                          onTap: () {
+                            clearCheckboxes(); // Reset checkboxes
+                          },
+                          child: Image.asset(
+                            "assets/img/close.png",
+                            width: 18,
+                            height: 18,
+                          ),
                         )
                       ],
                     ),

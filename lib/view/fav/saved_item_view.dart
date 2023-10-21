@@ -1,3 +1,4 @@
+import 'package:cp_shopping/view/main_tab/main_tabview.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/color_extension.dart';
@@ -17,7 +18,7 @@ class _SavedItemsViewState extends State<SavedItemsView> {
       "name": "Handbag LV",
       "price": "\$225",
       "color": "#8F5F43",
-      "size": "",
+      "size": "4L",
       "image": "assets/img/handbag.png",
     },
     {
@@ -42,11 +43,24 @@ class _SavedItemsViewState extends State<SavedItemsView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const MainTabView()));
+            },
+            icon: const Icon(Icons.arrow_back_ios_new),
+            color: TColor.title,
+          ),
+          centerTitle: true,
           backgroundColor: TColor.white,
           elevation: 0.5,
           title: Text(
             "Saved Items",
-            style: TextStyle(color: TColor.primaryText, fontSize: 20),
+            style: TextStyle(
+                letterSpacing: 1,
+                color: TColor.title,
+                fontSize: 20,
+                fontWeight: FontWeight.w700),
           ),
           actions: [
             IconButton(
@@ -70,22 +84,21 @@ class _SavedItemsViewState extends State<SavedItemsView> {
                       title: "All Items",
                       isActive: selectTab == 0,
                       onPressed: () {
-
                         setState(() {
                           selectTab = 0;
                         });
                       },
                     ),
                   ),
-
-                  const SizedBox(width: 15,),
-
-                   Expanded(
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
                     child: TabTextButton(
                       title: "Brands",
                       isActive: selectTab == 1,
                       onPressed: () {
-                         setState(() {
+                        setState(() {
                           selectTab = 1;
                         });
                       },
@@ -94,21 +107,20 @@ class _SavedItemsViewState extends State<SavedItemsView> {
                 ],
               ),
             ),
+            if (selectTab == 0)
+              Expanded(
+                child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    itemCount: listArr.length,
+                    itemBuilder: (context, index) {
+                      var pObj = listArr[index] as Map? ?? {};
 
-            if(selectTab == 0)
-            Expanded(
-              child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  itemCount: listArr.length,
-                  itemBuilder: (context, index) {
-                    var pObj = listArr[index] as Map? ?? {};
-
-                    return SaveItemRow(
-                      pObj: pObj,
-                      onPressed: () {},
-                    );
-                  }),
-            )
+                      return SaveItemRow(
+                        pObj: pObj,
+                        onPressed: () {},
+                      );
+                    }),
+              )
           ],
         ));
   }

@@ -21,9 +21,7 @@ class SectionTitleIcon extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-              color: TColor.primaryText,
-              fontSize: 18,
-              fontWeight: FontWeight.w500),
+              color: TColor.title, fontSize: 18, fontWeight: FontWeight.w600),
         ),
         IconButton(
             onPressed: onPressed,

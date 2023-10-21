@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../common/color_extension.dart';
 
- 
 class Dropdown extends StatelessWidget {
   final String placeholder;
   final List valueList;
@@ -19,7 +18,7 @@ class Dropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 44,
-      padding: const  EdgeInsets.only(left: 15),
+      padding: const EdgeInsets.only(left: 15),
       decoration: BoxDecoration(
           border:
               Border.all(color: TColor.primaryText.withOpacity(0.5), width: 1),
@@ -27,11 +26,11 @@ class Dropdown extends StatelessWidget {
       alignment: Alignment.center,
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          icon: Icon(
+            icon: Icon(
               Icons.expand_more,
               color: TColor.secondaryText,
             ),
-          value: selectValue,
+            value: selectValue,
             hint: Text(
               placeholder,
               style: TextStyle(color: TColor.secondaryText, fontSize: 16),
@@ -42,7 +41,10 @@ class Dropdown extends StatelessWidget {
                 value: obj.toString(),
                 child: Text(
                   obj.toString(),
-                  style: TextStyle(color: TColor.primaryText, fontSize: 16),
+                  style: TextStyle(
+                      color: TColor.primary,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500),
                 ),
               );
             }).toList(),

@@ -17,18 +17,14 @@ class SectionSeeAll extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-              color: TColor.primaryText,
-              fontSize: 18,
-              fontWeight: FontWeight.w500),
+              color: TColor.title, fontSize: 18, fontWeight: FontWeight.w600),
         ),
         TextButton(
             onPressed: onPressed,
-            child: Text(
+            child: const Text(
               "View All",
               style: TextStyle(
-                  color: TColor.primary,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500),
+                  color: Colors.red, fontSize: 14, fontWeight: FontWeight.w600),
             )),
       ],
     );

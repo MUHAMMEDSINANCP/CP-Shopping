@@ -1,3 +1,4 @@
+import 'package:cp_shopping/view/fav/saved_item_view.dart';
 import 'package:cp_shopping/view/home/product_list_view.dart';
 import 'package:flutter/material.dart';
 
@@ -98,12 +99,16 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.5,
+        elevation: 1,
         backgroundColor: TColor.white,
         centerTitle: true,
         title: Text(
-          "Home",
-          style: TextStyle(color: TColor.primaryText, fontSize: 20),
+          "🛒CP SHOPPING",
+          style: TextStyle(
+              letterSpacing: 1.5,
+              color: TColor.title,
+              fontSize: 19,
+              fontWeight: FontWeight.w700),
         ),
       ),
       body: SingleChildScrollView(
@@ -182,7 +187,12 @@ class _HomeViewState extends State<HomeView> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: SectionSeeAll(
                 title: "Saved items",
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SavedItemsView()));
+                },
               ),
             ),
             ListView.builder(
@@ -202,7 +212,10 @@ class _HomeViewState extends State<HomeView> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Text(
                 "Brands you  may like",
-                style: TextStyle(color: TColor.primaryText, fontSize: 18),
+                style: TextStyle(
+                    color: TColor.title,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600),
               ),
             ),
             Padding(
@@ -234,7 +247,10 @@ class _HomeViewState extends State<HomeView> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Text(
                 "Styles based on your shopping habits",
-                style: TextStyle(color: TColor.primaryText, fontSize: 18),
+                style: TextStyle(
+                    color: TColor.title,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600),
               ),
             ),
             GridView.builder(

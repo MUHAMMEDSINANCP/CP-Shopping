@@ -63,3 +63,94 @@ class RoundTextField extends StatelessWidget {
     );
   }
 }
+// Eye Icon TextField
+
+class RoundTextFieldWithEyeIcon extends StatefulWidget {
+  final String title;
+  final String hitText;
+  final String subtext;
+  final TextEditingController? controller;
+  final TextInputType? keyboardType;
+  final bool showEyeIcon;
+  const RoundTextFieldWithEyeIcon({
+    super.key,
+    required this.title,
+    required this.hitText,
+    this.controller,
+    this.subtext = "",
+    this.keyboardType,
+    this.showEyeIcon = false,
+  });
+
+  @override
+  State<RoundTextFieldWithEyeIcon> createState() =>
+      _RoundTextFieldWithEyeIconState();
+}
+
+class _RoundTextFieldWithEyeIconState extends State<RoundTextFieldWithEyeIcon> {
+  bool _obscureText = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          widget.title,
+          style: TextStyle(color: TColor.secondaryText, fontSize: 14),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: TColor.primaryText.withOpacity(0.5),
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(3),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: widget.controller,
+                  keyboardType: widget.keyboardType,
+                  obscureText: _obscureText,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    hintText: widget.hitText,
+                    hintStyle: TextStyle(
+                      color: TColor.secondaryText,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ),
+              if (widget
+                  .showEyeIcon) // Show the eye icon if showEyeIcon is true
+                IconButton(
+                  icon: Icon(
+                    _obscureText ? Icons.visibility_off : Icons.visibility,
+                    color: TColor.primaryText,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                ),
+            ],
+          ),
+        ),
+        SizedBox(height: widget.subtext.isNotEmpty ? 8 : 0),
+        if (widget.subtext.isNotEmpty)
+          Text(
+            widget.subtext,
+            style: TextStyle(color: TColor.secondaryText, fontSize: 12),
+          ),
+      ],
+    );
+  }
+}

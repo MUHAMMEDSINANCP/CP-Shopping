@@ -57,6 +57,7 @@ class _SearchViewState extends State<SearchView> {
     var media = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 68,
         backgroundColor: TColor.white,
         elevation: 0,
         // leading: IconButton(
@@ -77,9 +78,7 @@ class _SearchViewState extends State<SearchView> {
           child: TextField(
             controller: txtSearch,
             onChanged: (newVal) {
-              setState(() {
-                
-              });
+              setState(() {});
             },
             decoration: InputDecoration(
                 contentPadding:
@@ -117,28 +116,23 @@ class _SearchViewState extends State<SearchView> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (receArr.length > 0 && txtSearch.text.isEmpty)
+          if (receArr.isNotEmpty && txtSearch.text.isEmpty)
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: SectionTitleIcon(
                 title: "Recent searches",
                 icon: "assets/img/close.png",
                 onPressed: () {
-
                   receArr.clear();
 
-                  setState(() {
-                    
-                  });
-
+                  setState(() {});
                 },
               ),
             ),
-          if (receArr.length > 0 && txtSearch.text.isEmpty)
+          if (receArr.isNotEmpty && txtSearch.text.isEmpty)
             Expanded(
               child: ListView.separated(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemCount: receArr.length,
                 separatorBuilder: (context, index) => Divider(
                   color: TColor.secondaryText,
@@ -148,9 +142,7 @@ class _SearchViewState extends State<SearchView> {
                   var rObj = receArr[index] as Map? ?? {};
                   return SearchRow(
                     sObj: rObj,
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                   );
                 },
               ),
@@ -179,7 +171,6 @@ class _SearchViewState extends State<SearchView> {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-
                 children: [
                   Image.asset(
                     "assets/img/search_black.png",
@@ -194,13 +185,14 @@ class _SearchViewState extends State<SearchView> {
                       Text(
                         "You have not recent\nsearches.",
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: TColor.secondaryText, fontSize: 16),
+                        style: TextStyle(
+                            color: TColor.secondaryText, fontSize: 16),
                       ),
                     ],
                   ),
                 ],
               ),
-            )
+            ),
         ],
       ),
     );

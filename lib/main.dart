@@ -1,6 +1,7 @@
 import 'package:cp_shopping/common/color_extension.dart';
-import 'package:cp_shopping/view/main_tab/main_tabview.dart';
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
+
+import 'view/on_boarding/on_boarding_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: TColor.primary),
         useMaterial3: false,
       ),
-      home: const MainTabView(),
+      home: const OnBoardingView(),
     );
   }
 }

@@ -163,7 +163,7 @@ class _ProductListViewState extends State<ProductListView> {
                     crossAxisCount: 2,
                     mainAxisSpacing: 15,
                     crossAxisSpacing: 15,
-                    childAspectRatio: 1.1),
+                    childAspectRatio: 1),
                 itemCount: listArr.length,
                 itemBuilder: (context, index) {
                   var pObj = listArr[index] as Map? ?? {};
