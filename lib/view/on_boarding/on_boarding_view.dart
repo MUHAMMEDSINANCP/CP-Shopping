@@ -65,7 +65,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                   return Container(
                     width: media.width,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 60),
+                        horizontal: 20, vertical: 70),
                     child: Column(
                       children: [
                         Image.asset(
@@ -97,42 +97,46 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                     ),
                   );
                 }),
-            Column(
-              children: [
-                const Spacer(),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: pageArr.map((pObj) {
-                    var index = pageArr.indexOf(pObj);
-
-                    return Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 2),
-                      height: 7,
-                      width: 7,
-                      decoration: BoxDecoration(
-                          color: index == selectPage
-                              ? TColor.primary
-                              : TColor.secondaryText,
-                          borderRadius: BorderRadius.circular(2)),
-                    );
-                  }).toList(),
-                ),
-                SizedBox(
-                  height: media.width * 0.07,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: RoundButton(
-                    title: "Get Started!",
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpView()));
-                    },
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: media.width * 1.65,
                   ),
-                )
-              ],
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: pageArr.map((pObj) {
+                      var index = pageArr.indexOf(pObj);
+
+                      return Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 2),
+                        height: 7,
+                        width: 7,
+                        decoration: BoxDecoration(
+                            color: index == selectPage
+                                ? TColor.primary
+                                : TColor.secondaryText,
+                            borderRadius: BorderRadius.circular(2)),
+                      );
+                    }).toList(),
+                  ),
+                  SizedBox(
+                    height: media.width * 0.01,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(35),
+                    child: RoundButton(
+                      title: "Get Started!",
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUpView()));
+                      },
+                    ),
+                  )
+                ],
+              ),
             )
           ],
         ),

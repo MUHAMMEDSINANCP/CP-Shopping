@@ -28,13 +28,14 @@ class _GiftCardViewState extends State<GiftCardView> {
               },
               icon: Image.asset(
                 "assets/img/back.png",
-                width: 20,
-                height: 20,
-                color: TColor.secondaryText,
+                width: 25,
+                height: 25,
+                color: TColor.title,
               )),
           title: Text(
-            "Gift cards & voucher",
-            style: TextStyle(color: TColor.primaryText, fontSize: 20),
+            "Gift cards & Voucher",
+            style: TextStyle(
+                color: TColor.title, fontSize: 20, fontWeight: FontWeight.w700),
           ),
         ),
         body: SingleChildScrollView(

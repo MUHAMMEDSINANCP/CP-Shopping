@@ -1,3 +1,4 @@
+import 'package:cp_shopping/view/cart/cart_view.dart';
 import 'package:cp_shopping/view/home/filter_view.dart';
 import 'package:flutter/material.dart';
 
@@ -95,6 +96,7 @@ class _ProductListViewState extends State<ProductListView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: TColor.white,
         elevation: 0.5,
         leading: IconButton(
@@ -103,17 +105,21 @@ class _ProductListViewState extends State<ProductListView> {
             },
             icon: Image.asset(
               "assets/img/back.png",
-              width: 20,
-              height: 20,
-              color: TColor.secondaryText,
+              width: 25,
+              height: 25,
+              color: TColor.title,
             )),
         title: Text(
-          "New Tend",
-          style: TextStyle(color: TColor.primaryText, fontSize: 20),
+          "New Trends",
+          style: TextStyle(
+              color: TColor.title, fontSize: 19, fontWeight: FontWeight.w700),
         ),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const CartView()));
+              },
               icon: Image.asset(
                 "assets/img/cart_tab.png",
                 width: 22,

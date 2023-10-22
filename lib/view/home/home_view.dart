@@ -1,5 +1,7 @@
-import 'package:cp_shopping/view/fav/saved_item_view.dart';
+ import 'package:cp_shopping/view/fav/saved_item_view.dart';
 import 'package:cp_shopping/view/home/product_list_view.dart';
+import 'package:cp_shopping/view/account/settings_view.dart';
+import 'package:cp_shopping/view/account/social_accounts.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/color_extension.dart';
@@ -10,6 +12,10 @@ import '../../../common_widget/home_styles_cell.dart';
 import '../../../common_widget/recently_cell.dart';
 import '../../../common_widget/section_see_all.dart';
 import '../../../common_widget/section_title_icon.dart';
+import '../account/about_us.dart';
+ import '../account/gift_card_view.dart';
+import '../account/my_order_view.dart';
+import '../on_boarding/on_boarding_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -26,14 +32,14 @@ class _HomeViewState extends State<HomeView> {
       "image": "assets/img/graphic_shirts.png",
     },
     {
-      "name": "Summer co-ords",
-      "detail": "Just add kicks",
-      "image": "assets/img/summer_co_ords.png"
-    },
-    {
       "name": "Sandals",
       "detail": "Stay cool",
       "image": "assets/img/sandal.png",
+    },
+    {
+      "name": "Summer co-ords",
+      "detail": "Just add kicks",
+      "image": "assets/img/summer_co_ords.png"
     },
     {
       "name": "Face coverings",
@@ -99,24 +105,36 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              color: TColor.title,
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer(); // Use Scaffold.of(context)
+              },
+            );
+          },
+        ),
         elevation: 1,
         backgroundColor: TColor.white,
         centerTitle: true,
         title: Text(
           "🛒CP SHOPPING",
           style: TextStyle(
-              letterSpacing: 1.5,
+              letterSpacing: 2,
               color: TColor.title,
-              fontSize: 19,
-              fontWeight: FontWeight.w700),
+              fontSize: 22,
+              fontWeight: FontWeight.w900),
         ),
       ),
+      drawer: buildDrawer(context),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             HomeSectionRow(
-              title: "NEW TREND",
+              title: "NEW TRENDS",
               img: "assets/img/new_trend.png",
               onPressed: () {
                 Navigator.push(
@@ -281,4 +299,215 @@ class _HomeViewState extends State<HomeView> {
       ),
     );
   }
+}
+
+Widget buildDrawer(BuildContext context) {
+  return Drawer(
+    width: 300,
+    shadowColor: TColor.title,
+    elevation: 16.0,
+    shape: RoundedRectangleBorder(
+      side: BorderSide(width: 4.0, color: TColor.title.withOpacity(0.8)),
+      borderRadius: const BorderRadius.only(
+        topRight: Radius.circular(40.0),
+        bottomRight: Radius.circular(40.0),
+      ),
+    ),
+    child: Column(
+      children: <Widget>[
+        UserAccountsDrawerHeader(
+          margin: const EdgeInsets.only(left: 20),
+          decoration: const BoxDecoration(color: Colors.white),
+          accountName: Text(
+            "Rinza",
+            style: TextStyle(
+                color: TColor.title,
+                fontSize: 19,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 1),
+          ),
+          accountEmail: Text(
+            "rinza@gmail.com",
+            style: TextStyle(
+              color: TColor.title.withOpacity(0.6),
+              fontSize: 15,
+              letterSpacing: 1,
+            ),
+          ),
+          currentAccountPicture: const CircleAvatar(
+            backgroundImage: AssetImage("assets/img/u2.png"),
+          ),
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.shopping_cart,
+            color: TColor.title,
+          ),
+          title: const Text('My Order'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const MyOrderView(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.account_circle,
+            color: TColor.title,
+          ),
+          title: const Text(
+            'Social Accounts',
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SocialAccounts(
+                  didSelect: (newVal) {},
+                ),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.card_giftcard,
+            color: TColor.title,
+          ),
+          title: const Text('Gift Cards & Voucher'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const GiftCardView(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.settings,
+            color: TColor.title,
+          ),
+          title: const Text('Settings'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SettingsView(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.info,
+            color: TColor.title,
+          ),
+          title: const Text('About us'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AboutUs(),
+              ),
+            );
+          },
+        ),
+        const Expanded(
+          child: SizedBox(),
+        ),
+        ListTile(
+          leading: const Icon(
+            Icons.exit_to_app,
+            color: Colors.red,
+          ),
+          title: const Text(
+            'Sign Out',
+            style: TextStyle(color: Colors.red),
+          ),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Center(
+                      child: Text(
+                    'Confirm Sign Out',
+                    style: TextStyle(color: TColor.title),
+                  )),
+                  content: const Text(
+                    'Are you sure you want to sign out?',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text(
+                        'No',
+                        style: TextStyle(color: Colors.green),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    TextButton(
+                      child: const Text(
+                        'Yes',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const OnBoardingView(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 7,
+              child: Icon(
+                Icons.info,
+                size: 12,
+                color: TColor.secondaryText,
+              ),
+            ),
+            const SizedBox(
+              width: 2,
+            ),
+            Text(
+              "version ",
+              style: TextStyle(
+                color: TColor.secondaryText,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: Text(
+                "1.0.6",
+                style: TextStyle(color: TColor.secondaryText, fontSize: 11),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 10,
+        )
+      ],
+    ),
+  );
 }

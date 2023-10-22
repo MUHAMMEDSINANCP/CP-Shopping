@@ -1,3 +1,4 @@
+import 'package:cp_shopping/view/detail/product_detail_view.dart';
 import 'package:cp_shopping/view/main_tab/main_tabview.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class SavedItemsView extends StatefulWidget {
 }
 
 class _SavedItemsViewState extends State<SavedItemsView> {
-  List listArr = [
+  List alllistArr = [
     {
       "name": "Handbag LV",
       "price": "\$225",
@@ -23,18 +24,41 @@ class _SavedItemsViewState extends State<SavedItemsView> {
     },
     {
       "name": "T-shirt",
+      "price": "\$36",
+      "color": "#9D9EA3",
+      "size": "M",
+      "image": "assets/img/1.png",
+    },
+    {
+      "name": "T-shirt",
       "price": "\$86",
       "color": "#DF5C1F",
       "size": "XL",
       "image": "assets/img/t-shirt.png",
     },
+  ];
+  List brandsArr = [
     {
       "name": "T-shirt",
       "price": "\$36",
       "color": "#9D9EA3",
       "size": "M",
       "image": "assets/img/1.png",
-    }
+    },
+    {
+      "name": "T-shirt",
+      "price": "\$86",
+      "color": "#DF5C1F",
+      "size": "XL",
+      "image": "assets/img/t-shirt.png",
+    },
+    {
+      "name": "Handbag LV",
+      "price": "\$225",
+      "color": "#8F5F43",
+      "size": "4L",
+      "image": "assets/img/handbag.png",
+    },
   ];
 
   int selectTab = 0;
@@ -62,16 +86,6 @@ class _SavedItemsViewState extends State<SavedItemsView> {
                 fontSize: 20,
                 fontWeight: FontWeight.w700),
           ),
-          actions: [
-            IconButton(
-                onPressed: () {},
-                icon: Image.asset(
-                  "assets/img/cart_tab.png",
-                  width: 22,
-                  height: 22,
-                  color: TColor.primaryText,
-                ))
-          ],
         ),
         body: Column(
           children: [
@@ -111,13 +125,39 @@ class _SavedItemsViewState extends State<SavedItemsView> {
               Expanded(
                 child: ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    itemCount: listArr.length,
+                    itemCount: alllistArr.length,
                     itemBuilder: (context, index) {
-                      var pObj = listArr[index] as Map? ?? {};
+                      var pObj = alllistArr[index] as Map? ?? {};
 
                       return SaveItemRow(
                         pObj: pObj,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ProductDetailView()));
+                        },
+                      );
+                    }),
+              ),
+            if (selectTab == 1)
+              Expanded(
+                child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    itemCount: brandsArr.length,
+                    itemBuilder: (context, index) {
+                      var pObj = brandsArr[index] as Map? ?? {};
+
+                      return SaveItemRow(
+                        pObj: pObj,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ProductDetailView()));
+                        },
                       );
                     }),
               )

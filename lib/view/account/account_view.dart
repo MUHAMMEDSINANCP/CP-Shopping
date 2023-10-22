@@ -1,7 +1,9 @@
- 
+import 'package:cp_shopping/view/account/about_us.dart';
 import 'package:cp_shopping/view/account/gift_card_view.dart';
 import 'package:cp_shopping/view/account/my_order_view.dart';
 import 'package:cp_shopping/view/account/settings_view.dart';
+import 'package:cp_shopping/view/account/social_accounts.dart';
+import 'package:cp_shopping/view/on_boarding/on_boarding_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/color_extension.dart';
@@ -29,9 +31,21 @@ class _AccountViewState extends State<AccountView> {
                 pinned: true,
                 floating: true,
                 centerTitle: true,
-                title: Text(
-                  "Account",
-                  style: TextStyle(color: TColor.primary, fontSize: 20),
+                title: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: TColor.title.withOpacity(0.4),
+                    border: Border.all(
+                        color: TColor.white.withOpacity(0.4), width: 2.0),
+                  ),
+                  child: Text(
+                    " My Account ",
+                    style: TextStyle(
+                        letterSpacing: 1.4,
+                        color: TColor.white.withOpacity(0.6),
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20),
+                  ),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
                   background: Stack(
@@ -77,31 +91,55 @@ class _AccountViewState extends State<AccountView> {
                             height: 8,
                           ),
                           Text(
-                            "Code For Any",
-                            style: TextStyle(color: TColor.white, fontSize: 14),
+                            "Rinza",
+                            style: TextStyle(
+                                letterSpacing: 1.7,
+                                color: TColor.white,
+                                fontSize: 19,
+                                fontWeight: FontWeight.w800),
+                          ),
+                          Text(
+                            "rinza@gmail.com",
+                            style: TextStyle(
+                                letterSpacing: 1.2,
+                                color: TColor.white.withOpacity(0.7),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600),
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
                 // elevation: 0,
                 actions: [
                   IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SettingsView(),
-                          ),
-                        );
-                      },
-                      icon: Image.asset(
-                        "assets/img/gear.png",
-                        width: 22,
-                        height: 22,
-                        color: TColor.secondaryText,
-                      ))
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SettingsView(),
+                        ),
+                      );
+                    },
+                    icon: Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: TColor.title.withOpacity(0.5),
+                        border: Border.all(
+                            color: TColor.white.withOpacity(0.5), width: 2.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Image.asset(
+                          "assets/img/gear.png",
+                          color: TColor.white.withOpacity(0.8),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               )
             ];
@@ -175,7 +213,11 @@ class _AccountViewState extends State<AccountView> {
                         title: "Payment Methods",
                         icon: "assets/img/contactless-card.png",
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const AddPaymentMethodView() ) );
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AddPaymentMethodView()));
                         },
                       ),
                       AccountRow(
@@ -186,7 +228,14 @@ class _AccountViewState extends State<AccountView> {
                       AccountRow(
                         title: "Social Accounts",
                         icon: "assets/img/profile_tab.png",
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SocialAccounts(
+                                        didSelect: (newVal) {},
+                                      )));
+                        },
                       ),
                     ],
                   ),
@@ -239,12 +288,19 @@ class _AccountViewState extends State<AccountView> {
                   child: Column(
                     children: [
                       AccountRow(
-                        title: "Need help?",
+                        title: "About us",
                         icon: "assets/img/exclamation.png",
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AboutUs(),
+                            ),
+                          );
+                        },
                       ),
                       AccountRow(
-                        title: "Tell us what you think of Ebuy",
+                        title: "Tell us what you think of CP Shopping!",
                         icon: "assets/img/smartphone.png",
                         onPressed: () {},
                       ),
@@ -270,7 +326,52 @@ class _AccountViewState extends State<AccountView> {
                       AccountRow(
                         title: "Sign Out",
                         icon: "assets/img/logout (1).png",
-                        onPressed: () {},
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Center(
+                                    child: Text(
+                                  'Confirm Sign Out',
+                                  style: TextStyle(color: TColor.title),
+                                )),
+                                content: const Text(
+                                  'Are you sure you want to sign out?',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text(
+                                      'No',
+                                      style: TextStyle(color: Colors.green),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: const Text(
+                                      'Yes',
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const OnBoardingView(),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
                       ),
                     ],
                   ),

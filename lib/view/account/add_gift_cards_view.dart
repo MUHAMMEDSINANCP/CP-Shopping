@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../common/color_extension.dart';
 import '../../common_widget/round_buttom.dart';
 import '../../common_widget/round_textfield.dart';
@@ -27,13 +26,14 @@ class _AddGiftCardViewState extends State<AddGiftCardView> {
               },
               icon: Image.asset(
                 "assets/img/back.png",
-                width: 20,
-                height: 20,
-                color: TColor.secondaryText,
+                width: 25,
+                height: 25,
+                color: TColor.title,
               )),
           title: Text(
             "Add Gift cards",
-            style: TextStyle(color: TColor.primaryText, fontSize: 20),
+            style: TextStyle(
+                color: TColor.title, fontSize: 20, fontWeight: FontWeight.w700),
           ),
         ),
         body: SingleChildScrollView(

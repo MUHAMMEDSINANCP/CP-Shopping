@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 
-import '../common/color_extension.dart';
-
+ 
 class SectionSeeAll extends StatelessWidget {
   final String title;
+  final String titleAll;
+  final Color titleColor;
+
   final VoidCallback onPressed;
 
-  const SectionSeeAll(
-      {super.key, required this.title, required this.onPressed});
+  const SectionSeeAll({
+    super.key,
+    required this.title,
+    required this.onPressed,
+    this.titleAll = "View All",
+    this.titleColor = const Color(0xff895F44),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +24,13 @@ class SectionSeeAll extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-              color: TColor.title, fontSize: 18, fontWeight: FontWeight.w600),
+              color: titleColor, fontSize: 18, fontWeight: FontWeight.w600),
         ),
         TextButton(
             onPressed: onPressed,
-            child: const Text(
-              "View All",
-              style: TextStyle(
+            child: Text(
+              titleAll,
+              style: const TextStyle(
                   color: Colors.red, fontSize: 14, fontWeight: FontWeight.w600),
             )),
       ],

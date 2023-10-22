@@ -15,6 +15,17 @@ class CartView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const MainTabView()));
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            color: TColor.title,
+            size: 25,
+          ),
+        ),
         backgroundColor: Colors.white,
         centerTitle: true,
         elevation: 2,

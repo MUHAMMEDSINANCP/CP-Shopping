@@ -38,14 +38,17 @@ class HomeStylesCell extends StatelessWidget {
                     pObj["name"].toString(),
                     style: TextStyle(color: TColor.secondaryText, fontSize: 14),
                   ),
+                  const SizedBox(
+                    width: 24,
+                  ),
                   InkWell(
                     onTap: onFavPressed,
                     child: Image.asset(
                       (pObj["is_fav"] as bool? ?? false)
                           ? "assets/img/favorite.png"
                           : "assets/img/favorite_tab.png",
-                      width: 18,
-                      height: 18,
+                      width: 15,
+                      height: 15,
                     ),
                   )
                 ],

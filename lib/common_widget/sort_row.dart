@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../common/color_extension.dart';
 
 class SortRow extends StatelessWidget {
@@ -15,6 +14,7 @@ class SortRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return InkWell(
       onTap: onPressed,
       child: Column(

@@ -18,6 +18,7 @@ class _PriceViewState extends State<PriceView> {
     return Scaffold(
       backgroundColor: TColor.white,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: TColor.white,
         elevation: 0,
         leading: IconButton(
@@ -28,18 +29,17 @@ class _PriceViewState extends State<PriceView> {
               "assets/img/back.png",
               width: 20,
               height: 20,
-              color: TColor.secondaryText,
+              color: TColor.title,
             )),
         title: Text(
           "Price",
-          style: TextStyle(color: TColor.primaryText, fontSize: 20),
+          style: TextStyle(color: TColor.title, fontSize: 20),
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-              child: SingleChildScrollView(
-            child: Container(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
               margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               decoration: BoxDecoration(
@@ -88,16 +88,16 @@ class _PriceViewState extends State<PriceView> {
                 ],
               ),
             ),
-          )),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: RoundButton(
-                title: "Apply",
-                onPressed: () {
-                  Navigator.pop(context);
-                }),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: RoundButton(
+                  title: "Apply",
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+            )
+          ],
+        ),
       ),
     );
   }

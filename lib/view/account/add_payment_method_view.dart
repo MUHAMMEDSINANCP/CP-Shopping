@@ -28,13 +28,14 @@ class _AddPaymentMethodViewState extends State<AddPaymentMethodView> {
               },
               icon: Image.asset(
                 "assets/img/back.png",
-                width: 20,
-                height: 20,
-                color: TColor.secondaryText,
+                width: 25,
+                height: 25,
+                color: TColor.title,
               )),
           title: Text(
             "Add Payment",
-            style: TextStyle(color: TColor.primaryText, fontSize: 20),
+            style: TextStyle(
+                color: TColor.title, fontSize: 20, fontWeight: FontWeight.w700),
           ),
         ),
         body: SingleChildScrollView(
@@ -69,12 +70,16 @@ class _AddPaymentMethodViewState extends State<AddPaymentMethodView> {
                 child: Row(children: [
                   Expanded(
                     child: InkWell(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const AddCreditDebitCardView() ) );
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const AddCreditDebitCardView()));
                       },
                       child: DottedBorder(
                         borderType: BorderType.RRect,
-                        dashPattern: const [5,5],
+                        dashPattern: const [5, 5],
                         color: TColor.secondaryText,
                         child: Container(
                           height: 70,
@@ -130,19 +135,17 @@ class _AddPaymentMethodViewState extends State<AddPaymentMethodView> {
                       alignment: Alignment.center,
                       child: Image.asset(
                         "assets/img/Klarna.png",
-                         width: 40,
+                        width: 40,
                         height: 40,
                       ),
                     ),
                   )
                 ]),
               ),
-
-               const SizedBox(
+              const SizedBox(
                 height: 8,
               ),
-
-               Padding(
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   "Need help with these options?",
@@ -150,7 +153,6 @@ class _AddPaymentMethodViewState extends State<AddPaymentMethodView> {
                   style: TextStyle(color: TColor.secondaryText, fontSize: 14),
                 ),
               ),
-
               Container(
                 margin:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -168,17 +170,13 @@ class _AddPaymentMethodViewState extends State<AddPaymentMethodView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    
                     GiftRow(
                       title: "What is 4 eassy payments with Klarna?",
                       onPressed: () {},
                     ),
-                    
                   ],
                 ),
               ),
-
-
             ],
           ),
         ));

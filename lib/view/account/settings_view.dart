@@ -24,13 +24,14 @@ class _SettingsViewState extends State<SettingsView> {
               },
               icon: Image.asset(
                 "assets/img/back.png",
-                width: 20,
-                height: 20,
-                color: TColor.secondaryText,
+                width: 25,
+                height: 25,
+                color: TColor.title,
               )),
           title: Text(
             "Settings",
-            style: TextStyle(color: TColor.primaryText, fontSize: 20),
+            style: TextStyle(
+                color: TColor.title, fontSize: 22, fontWeight: FontWeight.w700),
           ),
         ),
         body: SingleChildScrollView(

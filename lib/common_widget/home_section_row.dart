@@ -36,9 +36,10 @@ class HomeSectionRow extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                      color: TColor.primaryText,
+                      color: TColor.primaryText.withOpacity(0.6),
+                      letterSpacing: 2,
                       fontSize: 24,
-                      fontWeight: FontWeight.w500),
+                      fontWeight: FontWeight.w700),
                 ),
                 if (subtitle != "")
                   const SizedBox(
@@ -48,9 +49,9 @@ class HomeSectionRow extends StatelessWidget {
                   Text(
                     subtitle,
                     style: TextStyle(
-                        color: TColor.primaryText,
+                        color: TColor.title.withOpacity(0.7),
                         fontSize: 16,
-                        fontWeight: FontWeight.w500),
+                        fontWeight: FontWeight.w400),
                   ),
               ],
             ),

@@ -151,16 +151,18 @@ class _SignUpViewState extends State<SignUpView> {
             },
             icon: Image.asset(
               "assets/img/back.png",
-              width: 20,
-              height: 20,
+              width: 25,
+              height: 25,
+              color: TColor.title,
             )),
         centerTitle: true,
         title: Text(
           "Sign up",
           style: TextStyle(
-              color: TColor.primaryText,
+              letterSpacing: 1.6,
+              color: TColor.title,
               fontSize: 20,
-              fontWeight: FontWeight.w500),
+              fontWeight: FontWeight.w700),
         ),
       ),
       body: SingleChildScrollView(
