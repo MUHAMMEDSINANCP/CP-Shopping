@@ -49,8 +49,8 @@ class _MainTabViewState extends State<MainTabView>
           controller: controller,
           children: const [
             HomeView(),
-            // SearchView(), or the new Search Screen
-            SearchNewView(),
+            SearchView(),
+            // SearchNewView(), or the new Search Screen
             CartView(),
             SavedItemsView(),
             AccountView(),

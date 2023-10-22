@@ -29,6 +29,7 @@ class _AccountViewState extends State<AccountView> {
                 backgroundColor: Colors.white,
                 expandedHeight: 250,
                 pinned: true,
+
                 floating: true,
                 centerTitle: true,
                 title: Container(
