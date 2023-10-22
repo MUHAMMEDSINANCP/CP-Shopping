@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../common/color_extension.dart';
 
-class HomeStylesCell extends StatelessWidget {
-  final Map pObj;
+class RecentlyViewCell extends StatelessWidget {
+  final Map rObj;
   final VoidCallback onPressed;
   final VoidCallback onFavPressed;
   final VoidCallback onLikePressed;
-  const HomeStylesCell(
+  const RecentlyViewCell(
       {super.key,
-      required this.pObj,
+      required this.rObj,
       required this.onPressed,
       required this.onFavPressed,
       required this.onLikePressed});
@@ -38,12 +38,9 @@ class HomeStylesCell extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: Text(
-                      pObj["name"].toString(),
-                      style:
-                          TextStyle(color: TColor.secondaryText, fontSize: 14),
-                    ),
+                  Text(
+                    rObj["name"].toString(),
+                    style: TextStyle(color: TColor.secondaryText, fontSize: 14),
                   ),
                   const SizedBox(
                     width: 24,
@@ -51,7 +48,7 @@ class HomeStylesCell extends StatelessWidget {
                   InkWell(
                     onTap: onFavPressed,
                     child: Image.asset(
-                      (pObj["is_fav"] as bool? ?? false)
+                      (rObj["is_fav"] as bool? ?? false)
                           ? "assets/img/favorite.png"
                           : "assets/img/favorite_tab.png",
                       width: 15,
@@ -64,11 +61,15 @@ class HomeStylesCell extends StatelessWidget {
                 height: 8,
               ),
               Row(
+                mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    pObj["price"],
+                    rObj["price"],
                     style: TextStyle(color: TColor.primaryText, fontSize: 16),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.sizeOf(context).width * 0.2,
                   ),
                   InkWell(
                     onTap: onFavPressed,
@@ -87,7 +88,7 @@ class HomeStylesCell extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Image.asset(
-            pObj["image"],
+            rObj["image"],
             height: 100,
           ),
         )

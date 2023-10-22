@@ -1,3 +1,4 @@
+import 'package:cp_shopping/common_widget/recently_view_cell.dart';
 import 'package:cp_shopping/common_widget/review_row.dart';
 import 'package:cp_shopping/common_widget/round_buttom.dart';
 import 'package:cp_shopping/common_widget/section_see_all.dart';
@@ -370,7 +371,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                                   const EdgeInsets.symmetric(horizontal: 20),
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount: 3,
+                              itemCount: 1,
                               itemBuilder: (context, index) {
                                 return const ReviewRow(
                                   rObj: {
@@ -399,14 +400,14 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                       height: 4,
                     ),
                     SizedBox(
-                      height: 150,
+                      height: 160,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: stylesBaseArr.length,
                         itemBuilder: (context, index) {
-                          var pObj = stylesBaseArr[index] as Map? ?? {};
-                          return HomeStylesCell(
-                            pObj: pObj,
+                          var reObj = stylesBaseArr[index] as Map? ?? {};
+                          return RecentlyViewCell(
+                            rObj: reObj,
                             onPressed: () {},
                             onFavPressed: () {},
                             onLikePressed: () {},
@@ -438,7 +439,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                                 crossAxisCount: 2,
                                 mainAxisSpacing: 15,
                                 crossAxisSpacing: 15,
-                                childAspectRatio: 1.0),
+                                childAspectRatio: 0.87),
                         itemCount: listArr.length,
                         itemBuilder: (context, index) {
                           var pObj = listArr[index] as Map? ?? {};

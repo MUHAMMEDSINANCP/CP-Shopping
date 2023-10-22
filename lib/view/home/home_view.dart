@@ -1,4 +1,5 @@
- import 'package:cp_shopping/view/fav/saved_item_view.dart';
+import 'package:cp_shopping/view/detail/product_detail_view.dart';
+import 'package:cp_shopping/view/fav/saved_item_view.dart';
 import 'package:cp_shopping/view/home/product_list_view.dart';
 import 'package:cp_shopping/view/account/settings_view.dart';
 import 'package:cp_shopping/view/account/social_accounts.dart';
@@ -13,7 +14,7 @@ import '../../../common_widget/recently_cell.dart';
 import '../../../common_widget/section_see_all.dart';
 import '../../../common_widget/section_title_icon.dart';
 import '../account/about_us.dart';
- import '../account/gift_card_view.dart';
+import '../account/gift_card_view.dart';
 import '../account/my_order_view.dart';
 import '../on_boarding/on_boarding_view.dart';
 
@@ -135,7 +136,7 @@ class _HomeViewState extends State<HomeView> {
           children: [
             HomeSectionRow(
               title: "NEW TRENDS",
-              img: "assets/img/new_trend.png",
+              img: "assets/img/summer_sea.png",
               onPressed: () {
                 Navigator.push(
                   context,
@@ -160,19 +161,34 @@ class _HomeViewState extends State<HomeView> {
 
                   return HomeCell(
                     pObj: pObj,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ProductDetailView()));
+                    },
                   );
                 }),
             HomeSectionRow(
               title: "SRIPPES",
               subtitle: "The line kings",
               img: "assets/img/srippes.png",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProductDetailView()));
+              },
             ),
             HomeSectionRow(
               title: "SUMMER SEA",
               img: "assets/img/summer_sea.png",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProductDetailView()));
+              },
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),

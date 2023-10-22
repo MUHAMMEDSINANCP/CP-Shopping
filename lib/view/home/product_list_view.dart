@@ -1,4 +1,5 @@
 import 'package:cp_shopping/view/cart/cart_view.dart';
+import 'package:cp_shopping/view/detail/product_detail_view.dart';
 import 'package:cp_shopping/view/home/filter_view.dart';
 import 'package:flutter/material.dart';
 
@@ -176,7 +177,12 @@ class _ProductListViewState extends State<ProductListView> {
 
                   return ProductCell(
                     pObj: pObj,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ProductDetailView()));
+                    },
                     onFavPressed: () {},
                     onLikePressed: () {},
                   );
