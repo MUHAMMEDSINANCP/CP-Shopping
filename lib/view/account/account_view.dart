@@ -92,7 +92,7 @@ class _AccountViewState extends State<AccountView> {
                             height: 8,
                           ),
                           Text(
-                            "Rinza",
+                            "Jennifer",
                             style: TextStyle(
                                 letterSpacing: 1.7,
                                 color: TColor.white,

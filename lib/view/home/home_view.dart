@@ -335,7 +335,7 @@ Widget buildDrawer(BuildContext context) {
           margin: const EdgeInsets.only(left: 20),
           decoration: const BoxDecoration(color: Colors.white),
           accountName: Text(
-            "Rinza",
+            "Jennifer",
             style: TextStyle(
                 color: TColor.title,
                 fontSize: 19,
@@ -343,7 +343,7 @@ Widget buildDrawer(BuildContext context) {
                 letterSpacing: 1),
           ),
           accountEmail: Text(
-            "rinza@gmail.com",
+            "jennifer@gmail.com",
             style: TextStyle(
               color: TColor.title.withOpacity(0.6),
               fontSize: 15,
