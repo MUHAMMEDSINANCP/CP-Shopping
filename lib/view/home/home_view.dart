@@ -1,10 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cp_shopping/view/detail/product_detail_view.dart';
 import 'package:cp_shopping/view/fav/saved_item_view.dart';
 import 'package:cp_shopping/view/home/product_list_view.dart';
 import 'package:cp_shopping/view/account/settings_view.dart';
 import 'package:cp_shopping/view/account/social_accounts.dart';
+import 'package:cp_shopping/view/on_boarding/on_boarding_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../../common/color_extension.dart';
 import '../../../common_widget/home_cell.dart';
 import '../../../common_widget/home_save_row.dart';
@@ -16,7 +18,6 @@ import '../../../common_widget/section_title_icon.dart';
 import '../account/about_us.dart';
 import '../account/gift_card_view.dart';
 import '../account/my_order_view.dart';
-import '../on_boarding/on_boarding_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -26,6 +27,34 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  @override
+  void initState() {
+    fetchUserName();
+    super.initState();
+  }
+
+  String name = "";
+  String email = "";
+  String lastName = "";
+
+  void fetchUserName() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+
+      if (mounted) {
+        setState(() {
+          name = userSnapshot['name'] ?? 'First Name';
+          email = userSnapshot['email'] ?? 'Email';
+          lastName = userSnapshot['last_name'] ?? 'Last Name';
+        });
+      }
+    }
+  }
+
   List listArr = [
     {
       "name": "Graphic shirts",
@@ -315,215 +344,248 @@ class _HomeViewState extends State<HomeView> {
       ),
     );
   }
-}
 
-Widget buildDrawer(BuildContext context) {
-  return Drawer(
-    width: 300,
-    shadowColor: TColor.title,
-    elevation: 16.0,
-    shape: RoundedRectangleBorder(
-      side: BorderSide(width: 4.0, color: TColor.title.withOpacity(0.8)),
-      borderRadius: const BorderRadius.only(
-        topRight: Radius.circular(40.0),
-        bottomRight: Radius.circular(40.0),
+  Widget buildDrawer(BuildContext context) {
+    return Drawer(
+      width: 300,
+      shadowColor: TColor.title,
+      elevation: 16.0,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(width: 4.0, color: TColor.title.withOpacity(0.8)),
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(40.0),
+          bottomRight: Radius.circular(40.0),
+        ),
       ),
-    ),
-    child: Column(
-      children: <Widget>[
-        UserAccountsDrawerHeader(
-          margin: const EdgeInsets.only(left: 20),
-          decoration: const BoxDecoration(color: Colors.white),
-          accountName: Text(
-            "Jennifer",
-            style: TextStyle(
-                color: TColor.title,
-                fontSize: 19,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 1),
-          ),
-          accountEmail: Text(
-            "jennifer@gmail.com",
-            style: TextStyle(
-              color: TColor.title.withOpacity(0.6),
-              fontSize: 15,
-              letterSpacing: 1,
+      child: Column(
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            margin: const EdgeInsets.only(left: 20),
+            decoration: const BoxDecoration(color: Colors.white),
+            accountName: Text(
+              name,
+              style: TextStyle(
+                  color: TColor.title,
+                  fontSize: 19,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1),
+            ),
+            accountEmail: Text(
+              email,
+              style: TextStyle(
+                color: TColor.title.withOpacity(0.6),
+                fontSize: 15,
+                letterSpacing: 1,
+              ),
+            ),
+            currentAccountPicture: const CircleAvatar(
+              backgroundImage: AssetImage(
+                "assets/img/pr.png",
+              ),
             ),
           ),
-          currentAccountPicture: const CircleAvatar(
-            backgroundImage: AssetImage("assets/img/u2.png"),
+          ListTile(
+            leading: Icon(
+              Icons.shopping_cart,
+              color: TColor.title,
+            ),
+            title: const Text('My Order'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MyOrderView(),
+                ),
+              );
+            },
           ),
-        ),
-        ListTile(
-          leading: Icon(
-            Icons.shopping_cart,
-            color: TColor.title,
+          ListTile(
+            leading: Icon(
+              Icons.account_circle,
+              color: TColor.title,
+            ),
+            title: const Text(
+              'Social Accounts',
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SocialAccounts(
+                    didSelect: (newVal) {},
+                  ),
+                ),
+              );
+            },
           ),
-          title: const Text('My Order'),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const MyOrderView(),
-              ),
-            );
-          },
-        ),
-        ListTile(
-          leading: Icon(
-            Icons.account_circle,
-            color: TColor.title,
+          ListTile(
+            leading: Icon(
+              Icons.card_giftcard,
+              color: TColor.title,
+            ),
+            title: const Text('Gift Cards & Voucher'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const GiftCardView(),
+                ),
+              );
+            },
           ),
-          title: const Text(
-            'Social Accounts',
+          ListTile(
+            leading: Icon(
+              Icons.settings,
+              color: TColor.title,
+            ),
+            title: const Text('Settings'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SettingsView(),
+                ),
+              );
+            },
           ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SocialAccounts(
-                  didSelect: (newVal) {},
+          ListTile(
+            leading: Icon(
+              Icons.info,
+              color: TColor.title,
+            ),
+            title: const Text('About us'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AboutUs(),
+                ),
+              );
+            },
+          ),
+          const Expanded(
+            child: SizedBox(),
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.exit_to_app,
+              color: Colors.red,
+            ),
+            title: const Text(
+              'Sign Out',
+              style: TextStyle(color: Colors.red),
+            ),
+            onTap: () {
+              confirmLogout();
+            },
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 7,
+                child: Icon(
+                  Icons.info,
+                  size: 12,
+                  color: TColor.secondaryText,
                 ),
               ),
-            );
-          },
-        ),
-        ListTile(
-          leading: Icon(
-            Icons.card_giftcard,
-            color: TColor.title,
-          ),
-          title: const Text('Gift Cards & Voucher'),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const GiftCardView(),
+              const SizedBox(
+                width: 2,
               ),
-            );
-          },
-        ),
-        ListTile(
-          leading: Icon(
-            Icons.settings,
-            color: TColor.title,
-          ),
-          title: const Text('Settings'),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const SettingsView(),
+              Text(
+                "version ",
+                style: TextStyle(
+                  color: TColor.secondaryText,
+                ),
               ),
-            );
-          },
-        ),
-        ListTile(
-          leading: Icon(
-            Icons.info,
-            color: TColor.title,
-          ),
-          title: const Text('About us'),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const AboutUs(),
+              Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: Text(
+                  "1.0.2",
+                  style: TextStyle(color: TColor.secondaryText, fontSize: 11),
+                ),
               ),
-            );
-          },
-        ),
-        const Expanded(
-          child: SizedBox(),
-        ),
-        ListTile(
-          leading: const Icon(
-            Icons.exit_to_app,
-            color: Colors.red,
+            ],
           ),
-          title: const Text(
-            'Sign Out',
-            style: TextStyle(color: Colors.red),
-          ),
-          onTap: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: Center(
-                      child: Text(
-                    'Confirm Sign Out',
-                    style: TextStyle(color: TColor.title),
-                  )),
-                  content: const Text(
-                    'Are you sure you want to sign out?',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 15),
+          const SizedBox(
+            height: 10,
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<void> confirmLogout() async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Center(
+            child: RichText(
+              text: TextSpan(
+                style: const TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.black, // Default color for text
+                ),
+                children: <TextSpan>[
+                  const TextSpan(
+                    text: 'Logout from ',
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
                   ),
-                  actions: <Widget>[
-                    TextButton(
-                      child: const Text(
-                        'No',
-                        style: TextStyle(color: Colors.green),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
+                  TextSpan(
+                    text: 'CP Shopping',
+                    style: TextStyle(
+                      color: TColor.primary, // Change color to yellow
+                      fontWeight: FontWeight.bold,
                     ),
-                    TextButton(
-                      child: const Text(
-                        'Yes',
-                        style: TextStyle(color: Colors.red),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const OnBoardingView(),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                );
+                  ),
+                ],
+              ),
+            ),
+          ),
+          content: const Text('Are you sure you want to logout?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
               },
-            );
-          },
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 7,
-              child: Icon(
-                Icons.info,
-                size: 12,
-                color: TColor.secondaryText,
+              child: const Text(
+                'Cancel',
+                style: TextStyle(
+                  color: Colors.black,
+                ),
               ),
             ),
-            const SizedBox(
-              width: 2,
-            ),
-            Text(
-              "version ",
-              style: TextStyle(
-                color: TColor.secondaryText,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 4),
-              child: Text(
-                "1.0.6",
-                style: TextStyle(color: TColor.secondaryText, fontSize: 11),
+            TextButton(
+              onPressed: () async {
+                // Perform logout logic here
+                await FirebaseAuth.instance.signOut();
+
+                if (mounted) {
+                  Navigator.of(context).pop();
+                }
+
+                if (mounted) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const OnBoardingView(),
+                    ),
+                  );
+                }
+              },
+              child: const Text(
+                'Logout',
+                style: TextStyle(
+                  color: Colors.red,
+                ),
               ),
             ),
           ],
-        ),
-        const SizedBox(
-          height: 10,
-        )
-      ],
-    ),
-  );
+        );
+      },
+    );
+  }
 }

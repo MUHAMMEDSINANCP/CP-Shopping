@@ -41,6 +41,7 @@ class _SearchNewViewState extends State<SearchNewView> {
         toolbarHeight: 68,
         backgroundColor: TColor.white,
         elevation: 0,
+        automaticallyImplyLeading: false,
         // leading: IconButton(
         //     onPressed: () {
         //       Navigator.pop(context);

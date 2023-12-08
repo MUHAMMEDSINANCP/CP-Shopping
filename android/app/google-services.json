@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "261380917845",
+    "project_id": "cp-shopping",
+    "storage_bucket": "cp-shopping.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261380917845:android:74004dfd5375b7ca20a2dc",
+        "android_client_info": {
+          "package_name": "com.example.cp_shopping"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmasggC_6-mcZ-3r83SJ39xgQLzdkmcAM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

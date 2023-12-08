@@ -1,6 +1,6 @@
 import 'package:cp_shopping/common_widget/recently_view_cell.dart';
 import 'package:cp_shopping/common_widget/review_row.dart';
-import 'package:cp_shopping/common_widget/round_buttom.dart';
+import 'package:cp_shopping/common_widget/round_button.dart';
 import 'package:cp_shopping/common_widget/section_see_all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -184,6 +184,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                                           color: Colors.amber,
                                         ),
                                     onRatingUpdate: (rating) {
+                                      // ignore: avoid_print
                                       print(rating);
                                     }),
                               ),
@@ -465,7 +466,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 20),
                       child: RoundButton(
-                        title: "Add to Card",
+                        title: "Add to Cart",
                         onPressed: () {},
                       ),
                     ),

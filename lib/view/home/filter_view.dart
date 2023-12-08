@@ -2,7 +2,7 @@ import 'package:cp_shopping/view/home/price_view.dart';
 import 'package:flutter/material.dart';
 import '../../common/color_extension.dart';
 import '../../../common_widget/fiter_row.dart';
-import '../../common_widget/round_buttom.dart';
+import '../../common_widget/round_button.dart';
 
 class FilterView extends StatefulWidget {
   const FilterView({super.key});

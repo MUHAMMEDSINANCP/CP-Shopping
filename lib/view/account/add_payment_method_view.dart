@@ -15,7 +15,7 @@ class AddPaymentMethodView extends StatefulWidget {
 class _AddPaymentMethodViewState extends State<AddPaymentMethodView> {
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.sizeOf(context);
+    // var media = MediaQuery.sizeOf(context);
     return Scaffold(
         backgroundColor: TColor.white,
         appBar: AppBar(

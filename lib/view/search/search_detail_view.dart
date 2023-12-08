@@ -1,9 +1,7 @@
 import 'package:cp_shopping/common_widget/item_cell.dart';
 import 'package:flutter/material.dart';
-
 import '../../common/color_extension.dart';
 import '../../common_widget/home_section_row.dart';
-import '../main_tab/main_tabview.dart';
 
 class SearchDetailView extends StatefulWidget {
   const SearchDetailView({super.key});
@@ -50,17 +48,7 @@ class _SearchDetailViewState extends State<SearchDetailView> {
               fontWeight: FontWeight.w700),
         ),
         centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Image.asset(
-            "assets/img/back.png",
-            color: TColor.title,
-            width: 25,
-            height: 25,
-          ),
-        ),
+        automaticallyImplyLeading: false,
       ),
       backgroundColor: TColor.white,
       body: SingleChildScrollView(

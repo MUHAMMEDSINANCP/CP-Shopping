@@ -1,7 +1,5 @@
-import 'package:cp_shopping/view/search/search_new_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../../common/color_extension.dart';
 import '../account/account_view.dart';
 import '../cart/cart_view.dart';
@@ -23,7 +21,6 @@ class _MainTabViewState extends State<MainTabView>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
 

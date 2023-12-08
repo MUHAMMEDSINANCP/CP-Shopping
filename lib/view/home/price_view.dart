@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../common/color_extension.dart';
-import '../../common_widget/round_buttom.dart';
+import '../../common_widget/round_button.dart';
 
 class PriceView extends StatefulWidget {
   const PriceView({super.key});

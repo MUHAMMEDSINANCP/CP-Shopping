@@ -9,6 +9,7 @@ class RoundTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final bool obscureText;
+  final String? Function(String?)? validator;
 
   const RoundTextField(
       {super.key,
@@ -17,7 +18,8 @@ class RoundTextField extends StatelessWidget {
       this.controller,
       this.subtext = "",
       this.obscureText = false,
-      this.keyboardType});
+      this.keyboardType,
+      this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,8 @@ class RoundTextField extends StatelessWidget {
                   color: TColor.primaryText.withOpacity(0.5), width: 1),
               borderRadius: BorderRadius.circular(3)),
           alignment: Alignment.center,
-          child: TextField(
+          child: TextFormField(
+            validator: validator,
             controller: controller,
             keyboardType: keyboardType,
             obscureText: obscureText,
@@ -72,6 +75,8 @@ class RoundTextFieldWithEyeIcon extends StatefulWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final bool showEyeIcon;
+  final String? Function(String?)? validator;
+
   const RoundTextFieldWithEyeIcon({
     super.key,
     required this.title,
@@ -80,6 +85,7 @@ class RoundTextFieldWithEyeIcon extends StatefulWidget {
     this.subtext = "",
     this.keyboardType,
     this.showEyeIcon = false,
+    this.validator,
   });
 
   @override
@@ -112,7 +118,8 @@ class _RoundTextFieldWithEyeIconState extends State<RoundTextFieldWithEyeIcon> {
           child: Row(
             children: [
               Expanded(
-                child: TextField(
+                child: TextFormField(
+                  validator: widget.validator,
                   controller: widget.controller,
                   keyboardType: widget.keyboardType,
                   obscureText: _obscureText,
@@ -133,7 +140,7 @@ class _RoundTextFieldWithEyeIconState extends State<RoundTextFieldWithEyeIcon> {
                 IconButton(
                   icon: Icon(
                     _obscureText ? Icons.visibility_off : Icons.visibility,
-                    color: TColor.primaryText,
+                    color: _obscureText ? TColor.primaryText : TColor.primary,
                   ),
                   onPressed: () {
                     setState(() {

@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cp_shopping/view/account/about_us.dart';
 import 'package:cp_shopping/view/account/gift_card_view.dart';
 import 'package:cp_shopping/view/account/my_order_view.dart';
 import 'package:cp_shopping/view/account/settings_view.dart';
 import 'package:cp_shopping/view/account/social_accounts.dart';
 import 'package:cp_shopping/view/on_boarding/on_boarding_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/color_extension.dart';
@@ -11,13 +13,43 @@ import '../../../common_widget/account_row.dart';
 import 'add_payment_method_view.dart';
 
 class AccountView extends StatefulWidget {
-  const AccountView({super.key});
+  const AccountView({
+    super.key,
+  });
 
   @override
   State<AccountView> createState() => _AccountViewState();
 }
 
 class _AccountViewState extends State<AccountView> {
+  @override
+  void initState() {
+    fetchUserName();
+    super.initState();
+  }
+
+  String name = "";
+  String email = "";
+  String lastName = "";
+
+  void fetchUserName() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+
+      if (mounted) {
+        setState(() {
+          name = userSnapshot['name'] ?? 'First Name';
+          email = userSnapshot['email'] ?? 'Email';
+          lastName = userSnapshot['last_name'] ?? 'Last Name';
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +97,7 @@ class _AccountViewState extends State<AccountView> {
                             alignment: Alignment.bottomRight,
                             children: [
                               Image.asset(
-                                "assets/img/u2.png",
+                                "assets/img/pr.png",
                                 width: 80,
                                 height: 80,
                               ),
@@ -92,15 +124,18 @@ class _AccountViewState extends State<AccountView> {
                             height: 8,
                           ),
                           Text(
-                            "Jennifer",
+                            name + lastName,
                             style: TextStyle(
                                 letterSpacing: 1.7,
                                 color: TColor.white,
                                 fontSize: 19,
                                 fontWeight: FontWeight.w800),
                           ),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           Text(
-                            "rinza@gmail.com",
+                            email,
                             style: TextStyle(
                                 letterSpacing: 1.2,
                                 color: TColor.white.withOpacity(0.7),
@@ -328,50 +363,7 @@ class _AccountViewState extends State<AccountView> {
                         title: "Sign Out",
                         icon: "assets/img/logout (1).png",
                         onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Center(
-                                    child: Text(
-                                  'Confirm Sign Out',
-                                  style: TextStyle(color: TColor.title),
-                                )),
-                                content: const Text(
-                                  'Are you sure you want to sign out?',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: const Text(
-                                      'No',
-                                      style: TextStyle(color: Colors.green),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                  TextButton(
-                                    child: const Text(
-                                      'Yes',
-                                      style: TextStyle(color: Colors.red),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const OnBoardingView(),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
+                          confirmLogout();
                         },
                       ),
                     ],
@@ -380,6 +372,79 @@ class _AccountViewState extends State<AccountView> {
               ],
             ),
           )),
+    );
+  }
+
+  Future<void> confirmLogout() async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Center(
+            child: RichText(
+              text: TextSpan(
+                style: const TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.black, // Default color for text
+                ),
+                children: <TextSpan>[
+                  const TextSpan(
+                    text: 'Logout from ',
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
+                  TextSpan(
+                    text: 'CP Shopping',
+                    style: TextStyle(
+                      color: TColor.primary, // Change color to yellow
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          content: const Text('Are you sure you want to logout?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text(
+                'Cancel',
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () async {
+                // Perform logout logic here
+                await FirebaseAuth.instance.signOut();
+
+                if (mounted) {
+                  Navigator.of(context).pop();
+                }
+
+                if (mounted) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const OnBoardingView(),
+                    ),
+                  );
+                }
+              },
+              child: const Text(
+                'Logout',
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

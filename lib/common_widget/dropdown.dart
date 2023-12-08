@@ -20,8 +20,11 @@ class Dropdown extends StatelessWidget {
       height: 44,
       padding: const EdgeInsets.only(left: 15),
       decoration: BoxDecoration(
-          border:
-              Border.all(color: TColor.primaryText.withOpacity(0.5), width: 1),
+          border: Border.all(
+              color: selectValue == null || selectValue!.isEmpty
+                  ? Colors.red
+                  : TColor.primaryText.withOpacity(0.5),
+              width: 1),
           borderRadius: BorderRadius.circular(3)),
       alignment: Alignment.center,
       child: DropdownButtonHideUnderline(

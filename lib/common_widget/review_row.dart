@@ -66,6 +66,7 @@ class ReviewRow extends StatelessWidget {
                                     color: Colors.amber,
                                   ),
                               onRatingUpdate: (rating) {
+                                // ignore: avoid_print
                                 print(rating);
                               }),
                         ),

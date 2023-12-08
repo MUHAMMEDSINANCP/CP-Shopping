@@ -1,7 +1,5 @@
 import 'package:cp_shopping/view/detail/product_detail_view.dart';
-import 'package:cp_shopping/view/main_tab/main_tabview.dart';
-import 'package:flutter/material.dart';
-
+ import 'package:flutter/material.dart';
 import '../../common/color_extension.dart';
 import '../../../common_widget/save_item_row.dart';
 import '../../../common_widget/tab_text_button.dart';
@@ -67,14 +65,15 @@ class _SavedItemsViewState extends State<SavedItemsView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const MainTabView()));
-            },
-            icon: const Icon(Icons.arrow_back_ios_new),
-            color: TColor.title,
-          ),
+          automaticallyImplyLeading: false,
+          // leading: IconButton(
+          //   onPressed: () {
+          //     Navigator.pushReplacement(context,
+          //         MaterialPageRoute(builder: (context) => const MainTabView()));
+          //   },
+          //   icon: const Icon(Icons.arrow_back_ios_new),
+          //   color: TColor.title,
+          // ),
           centerTitle: true,
           backgroundColor: TColor.white,
           elevation: 0.5,

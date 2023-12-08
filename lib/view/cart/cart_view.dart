@@ -1,5 +1,4 @@
-import 'package:cp_shopping/common_widget/round_buttom.dart';
-import 'package:cp_shopping/view/home/home_view.dart';
+import 'package:cp_shopping/common_widget/round_button.dart';
 import 'package:cp_shopping/view/main_tab/main_tabview.dart';
 import 'package:flutter/material.dart';
 
@@ -15,17 +14,18 @@ class CartView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const MainTabView()));
-          },
-          icon: Icon(
-            Icons.arrow_back_ios_new,
-            color: TColor.title,
-            size: 25,
-          ),
-        ),
+        automaticallyImplyLeading: false,
+        // leading: IconButton(
+        //   onPressed: () {
+        //     Navigator.push(context,
+        //         MaterialPageRoute(builder: (context) => const MainTabView()));
+        //   },
+        //   icon: Icon(
+        //     Icons.arrow_back_ios_new,
+        //     color: TColor.title,
+        //     size: 25,
+        //   ),
+        // ),
         backgroundColor: Colors.white,
         centerTitle: true,
         elevation: 2,

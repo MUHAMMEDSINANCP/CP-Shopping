@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../common/color_extension.dart';
-import '../../common_widget/round_buttom.dart';
+import '../../common_widget/round_button.dart';
 import '../../common_widget/round_textfield.dart';
 
 class AddGiftCardView extends StatefulWidget {
