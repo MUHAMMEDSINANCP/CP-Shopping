@@ -51,94 +51,85 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     var media = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            PageView.builder(
-                controller: controller,
-                itemCount: pageArr.length,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  var pObj = pageArr[index] as Map? ?? {};
+      body: Stack(
+        children: [
+          PageView.builder(
+              controller: controller,
+              itemCount: pageArr.length,
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (context, index) {
+                var pObj = pageArr[index] as Map? ?? {};
+
+                return Column(
+                  children: [
+                    SizedBox(
+                      height: media.width * 0.3,
+                    ),
+                    Image.asset(
+                      pObj["image"].toString(),
+                      width: media.width * 0.8,
+                      height: media.width * 0.8,
+                    ),
+                    const Spacer(),
+                    Text(
+                      pObj["title"].toString(),
+                      style: TextStyle(
+                          color: TColor.primary,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      pObj["subtitle"].toString(),
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(color: TColor.secondaryText, fontSize: 15),
+                    ),
+                    SizedBox(
+                      height: media.width * 0.65,
+                    ),
+                  ],
+                );
+              }),
+          Column(
+            children: [
+              SizedBox(
+                height: media.width * 1.55,
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: pageArr.map((pObj) {
+                  var index = pageArr.indexOf(pObj);
 
                   return Container(
-                    width: media.width,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 70),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          pObj["image"].toString(),
-                          width: media.width * 0.8,
-                          height: media.width * 0.8,
-                        ),
-                        const Spacer(),
-                        Text(
-                          pObj["title"].toString(),
-                          style: TextStyle(
-                              color: TColor.primary,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          pObj["subtitle"].toString(),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: TColor.secondaryText, fontSize: 15),
-                        ),
-                        SizedBox(
-                          height: media.width * 0.39,
-                        ),
-                      ],
-                    ),
+                    margin: const EdgeInsets.symmetric(horizontal: 2),
+                    height: 7,
+                    width: 7,
+                    decoration: BoxDecoration(
+                        color: index == selectPage
+                            ? TColor.primary
+                            : TColor.secondaryText,
+                        borderRadius: BorderRadius.circular(2)),
                   );
-                }),
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: media.width * 1.65,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: pageArr.map((pObj) {
-                      var index = pageArr.indexOf(pObj);
-
-                      return Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 2),
-                        height: 7,
-                        width: 7,
-                        decoration: BoxDecoration(
-                            color: index == selectPage
-                                ? TColor.primary
-                                : TColor.secondaryText,
-                            borderRadius: BorderRadius.circular(2)),
-                      );
-                    }).toList(),
-                  ),
-                  SizedBox(
-                    height: media.width * 0.01,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(35),
-                    child: RoundButton(
-                      title: "Get Started!",
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignUpView()));
-                      },
-                    ),
-                  )
-                ],
+                }).toList(),
               ),
-            )
-          ],
-        ),
+              Padding(
+                padding: const EdgeInsets.all(35),
+                child: RoundButton(
+                  title: "Get Started!",
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignUpView()));
+                  },
+                ),
+              )
+            ],
+          )
+        ],
       ),
     );
   }
