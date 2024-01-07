@@ -10,7 +10,7 @@ User-Friendly Cart : Seamless cart experience for effortless shopping.
 
 Secure Checkout : Reliable checkout and payment integration.
 
-Technologies Used : Firebase for authentication, clean architecture, Flutter state management.
+Technologies Used : Firebase for authentication, clean architecture, Flutter state management. 
 
 ### Usage :
 CP Shopping offers a user-friendly interface for browsing products, smooth cart management, and secure checkout, providing a seamless shopping experience.
